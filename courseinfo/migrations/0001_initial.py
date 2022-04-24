@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        #migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
@@ -28,11 +28,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Instructor',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('instructor_id', models.AutoField(primary_key=True, serialize=False)),
                 ('first_name', models.CharField(max_length=45)),
                 ('last_name', models.CharField(max_length=45)),
                 ('disambiguator', models.CharField(blank=True, default='', max_length=45)),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'ordering': ['last_name', 'first_name', 'disambiguator'],
@@ -62,11 +61,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Student',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('student_id', models.AutoField(primary_key=True, serialize=False)),
                 ('first_name', models.CharField(max_length=45)),
                 ('last_name', models.CharField(max_length=45)),
                 ('disambiguator', models.CharField(blank=True, default='', max_length=45)),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'ordering': ['last_name', 'first_name', 'disambiguator'],

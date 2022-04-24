@@ -1,20 +1,32 @@
 from django.contrib import admin
-from django.urls import path
-from courseinfo.views import(
-    instructor_list_view,
-    section_list_view,
-    course_list_view,
-    semester_list_view,
-    student_list_view,
-    registration_list_view,
-)
+from django.contrib.auth.views import LoginView, LogoutView
+from django.urls import path, include
+from django.views.generic import RedirectView, TemplateView
 
 urlpatterns = [
+    path('',
+         RedirectView.as_view(
+             pattern_name='about_urlpattern',
+             permanent=False
+         )),
+
+    path('login/',
+         LoginView.as_view(template_name='courseinfo/login.html'),
+         name='login_urlpattern'
+         ),
+
+    path('logout/',
+         LogoutView.as_view(),
+         name='logout_urlpattern'
+         ),
+
+    path('about/',
+         TemplateView.as_view(
+             template_name='courseinfo/about.html'),
+             name='about_urlpattern'
+         ),
+
     path('admin/', admin.site.urls),
-    path('instructor/', instructor_list_view),
-    path('section/', section_list_view),
-    path('course/', course_list_view),
-    path('semester/', semester_list_view),
-    path('student/', student_list_view),
-    path('registration/', registration_list_view),
+
+    path('', include('courseinfo.urls'))
 ]
